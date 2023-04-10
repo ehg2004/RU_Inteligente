@@ -10,19 +10,14 @@
             "includePath": [
                 "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/include",
                 "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/src",
-                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_ILI9341-1.5.12",
-                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_GFX_Library-1.11.5",
-                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_BusIO-1.14.1",
-                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
-                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                 "/home/gabrielbach/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "/home/gabrielbach/.platformio/packages/framework-arduino-avr/variants/standard",
-                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/MFRC522-1.4.10/src",
-                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/TTP229",
                 "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/Adafruit_BusIO",
                 "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                 "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                 ""
             ],
             "browse": {
@@ -30,19 +25,14 @@
                 "path": [
                     "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/include",
                     "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/src",
-                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_ILI9341-1.5.12",
-                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_GFX_Library-1.11.5",
-                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_BusIO-1.14.1",
-                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
-                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                     "/home/gabrielbach/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "/home/gabrielbach/.platformio/packages/framework-arduino-avr/variants/standard",
-                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/MFRC522-1.4.10/src",
-                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/TTP229",
                     "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/Adafruit_BusIO",
                     "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                     "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                     ""
                 ]
             },
