@@ -1,0 +1,68 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/include",
+                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/src",
+                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_ILI9341-1.5.12",
+                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_GFX_Library-1.11.5",
+                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_BusIO-1.14.1",
+                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/variants/standard",
+                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/MFRC522-1.4.10/src",
+                "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/TTP229",
+                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/Adafruit_BusIO",
+                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/include",
+                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/src",
+                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_ILI9341-1.5.12",
+                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_GFX_Library-1.11.5",
+                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/Adafruit_BusIO-1.14.1",
+                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/cores/arduino",
+                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/variants/standard",
+                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/MFRC522-1.4.10/src",
+                    "/home/gabrielbach/Arquivos/faculdade/semestres/terceiro/oficinas/FasTicket/lib/TTP229",
+                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/Adafruit_BusIO",
+                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    "/home/gabrielbach/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60106",
+                "ARDUINO_AVR_UNO",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega328P__",
+                ""
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "compilerPath": "/home/gabrielbach/.platformio/packages/toolchain-atmelavr/bin/avr-gcc",
+            "compilerArgs": [
+                "-mmcu=atmega328p",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
