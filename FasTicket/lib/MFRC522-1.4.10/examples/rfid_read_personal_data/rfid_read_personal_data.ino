@@ -127,7 +127,6 @@ void loop() {
     Serial.write(buffer2[i] );
   }
 
-
   //----------------------------------------
 
   Serial.println(F("\n**End Reading**\n"));
