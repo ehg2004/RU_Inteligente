@@ -6,8 +6,8 @@
 #include <Adafruit_ILI9341.h>
 
 //----------- RFID---------------//
-#define SS_PIN 7
-#define RST_PIN 6 
+#define SS_PIN 6
+#define RST_PIN 7
 MFRC522 rfid(SS_PIN, RST_PIN); 
 //-------------------------------//
 
@@ -39,3 +39,4 @@ void loop() {
 
 	delay(1000);
 }
+
