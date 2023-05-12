@@ -17,6 +17,7 @@ private:
     int price;
   public:
     Item(int n = 0);
+    String getName();
     ~Item();
   };
   int nItems;

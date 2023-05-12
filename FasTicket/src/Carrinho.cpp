@@ -11,7 +11,7 @@ Carrinho::~Carrinho()
 
 String Carrinho::getItemName(int i)
 {
-  return String();
+  return items[i].getName();
 }
 
 int Carrinho::getNItems()
@@ -38,7 +38,7 @@ void Carrinho::reset()
 Carrinho::Item::Item(int n)
 {
   code = n;
-  name = String("AA");
+  name = String(n);
   price = 0;
 }
 
@@ -47,7 +47,21 @@ Carrinho::Item::~Item()
   
 }
 
+String Carrinho::Item::getName()
+{
+  return name;
+}
+
 bool Carrinho::deleteItem(int n)
 {
+  if(n > nItems-1)
+  {
     return false;
+  }
+  if(n != nItems)
+  {
+    items[n]=items[nItems-1];
+  } 
+  nItems--;
+  return true;
 }

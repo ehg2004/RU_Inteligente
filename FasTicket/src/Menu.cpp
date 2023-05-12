@@ -32,6 +32,10 @@ void Menu::atualizar(int est)
   {
     estado = est;
   }
+  else
+  {
+    return;
+  }
 
   switch (estado)
   {

@@ -1,75 +1,52 @@
-#include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-#include <WiFiClient.h>
-#include <ArduinoJson.h>
 
-String serverName = "http://http://10.181.4.133:8888/index.php";
-
-String SSId = "#";
-String PASS = "12345678";
-
-WiFiClient client;
-HTTPClient http;
-
-void printWifiStatus() {
-
-  // print the SSID of the network you're attached to:
-
-  Serial.print("SSID: ");
-
-  Serial.println(WiFi.SSID());
-
-  // print your WiFi shield's IP address:
-
-  IPAddress ip = WiFi.localIP();
-
-  Serial.print("IP Address: ");
-
-  Serial.println(ip);
-
-  // print the received signal strength:
-
-  long rssi = WiFi.RSSI();
-
-  Serial.print("signal strength (RSSI):");
-
-  Serial.print(rssi);
-
-  Serial.println(" dBm");
-}
+const char* ssid = "Enzo";
+const char* password = "#Enzo04$";
+const char* serverName = "http://127.0.0.1:8000"; // URL do servidor a ser requisitado
 
 void setup() {
+  Serial.begin(115200);
 
-  Serial.begin(74880);
-  // Serial.setDebugOutput(true);
-  WiFi.begin("#", "12345678");
+  WiFi.begin(ssid, password);
 
-  Serial.print("Connecting");
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  Serial.println();
+  Serial.println();
+  Serial.print("Conectando-se à rede Wi-Fi ");
+  Serial.println(ssid);
+
+  while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
 
-  Serial.println();
-
-  Serial.print("Connected, IP address: ");
-  Serial.println(WiFi.localIP());
+  Serial.println("");
+  Serial.println("Conectado à rede Wi-Fi");
 }
 
 void loop() {
-  if (WiFi.status() == WL_CONNECTED)
-  {
-    http.begin(client, serverPath.c_str());
-    if(http.GET()>0)
-    {
-      Serial.println(http.getString());
+  if (WiFi.status() == WL_CONNECTED) {
+    WiFiClient client;
+    HTTPClient http;
+
+    Serial.print("Enviando requisição para ");
+    Serial.println(serverName);
+
+    http.begin(client, serverName);
+    int httpResponseCode = http.GET();
+
+    if (httpResponseCode > 0) {
+      Serial.print("Resposta do servidor: ");
+      Serial.println(httpResponseCode);
+    } else {
+      Serial.print("Erro na requisição: ");
+      Serial.println(httpResponseCode);
     }
-    else
-    {
-      Serial.println("EROOR");
-    }
+
     http.end();
+  } else {
+    Serial.println("Não foi possível se conectar à rede Wi-Fi");
   }
+
+  delay(500); // Espere 5 segundos antes de enviar a próxima requisição
 }
