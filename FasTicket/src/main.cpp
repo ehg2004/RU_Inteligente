@@ -34,18 +34,12 @@ void setup() {
 	Serial.begin(115200);
   SPI.begin(); 
   tft.begin();
-  rfid.PCD_Init();  
+  //rfid.PCD_Init();  
   menu.begin(&tft, &car);
+  menu.imprimir();
 }
 
 void loop() {
-  Serial.println("AAAAA");
-  
-  if(ttp.GetKey16() == RESET)
-  {
-    car.reset();
-    menu.atualizar(EstINIC);
-  }
   if(menu.getEstado() == EstINIC)
   {
     int key = ler(ttp.ReadKey16());
@@ -71,18 +65,33 @@ void loop() {
     {
       menu.atualizar(EstCANC);
     }
+    else if(key == RESET)
+    {
+      car.reset();
+      menu.atualizar(EstINIC);
+    }
   }
   else if (menu.getEstado() == EstCANC)
   {
     int key = ler(ttp.ReadKey16());
     if(key < CONF)
     {
-      car.deleteItem(key);
+      car.deleteItem(key-1);
       menu.atualizar(EstCARR);
+    }
+    else if(key == RESET)
+    {
+      car.reset();
+      menu.atualizar(EstINIC);
     }
   }
   else if(menu.getEstado() == EstRFID)
   {
+    if(ttp.GetKey16() == RESET)
+    {
+      car.reset();
+      menu.atualizar(EstINIC);
+    }
     if (!rfid.PICC_IsNewCardPresent()) return;
     if (!rfid.PICC_ReadCardSerial()) return;
     // Buscar no servidor se tem saldo
@@ -110,7 +119,6 @@ void loop() {
     delay(5000);
   }
   menu.imprimir();
-  
 }
 
 /*

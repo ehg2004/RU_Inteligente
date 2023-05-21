@@ -18,6 +18,7 @@ private:
   public:
     Item(int n = 0);
     String getName();
+    int getValor();
     ~Item();
   };
   int nItems;
@@ -30,4 +31,5 @@ public:
   bool setItem(int n);
   void reset();
   bool deleteItem(int n);
+  int getValor();
 };

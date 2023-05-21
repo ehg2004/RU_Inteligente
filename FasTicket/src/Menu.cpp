@@ -8,6 +8,8 @@ void Menu::begin(Adafruit_ILI9341* d, Carrinho* c)
   ds->setCursor(0, 0);
   ds->setTextSize(3);
   ds->setTextColor(ILI9341_WHITE);
+  str = String("Iniciar compra:");
+  estado = EstINIC;
 }
 
 Menu::Menu()
@@ -22,6 +24,7 @@ Menu::~Menu()
 
 void Menu::imprimir()
 {
+  ds->setCursor(0, 0);
   ds->fillScreen(ILI9341_BLACK);
   ds->print(str);
 }
@@ -41,14 +44,16 @@ void Menu::atualizar(int est)
   {
   case EstINIC: // Estado Inicial
   {
-    str = String("Adicione um produto");// Inicial
+    str = String("Iniciar compra:");// Inicial
     break;
   }
   case EstCARR: // Mostrar Carrinho
   {
-    str = String("Adicione um Produto");
+    str = String("Adicione um Produto:\n");
     for (int i = 0; i < car->getNItems(); i++)
     {
+      str.concat(i+1);
+      str.concat(" - ");
       str.concat(car->getItemName(i));
       str.concat("\n");
     }
@@ -56,18 +61,20 @@ void Menu::atualizar(int est)
   }
   case EstCANC: // Cancelar Produto
   {
-    str = String("Exclua seu Produto");
+    str = String("Exclua seu Produto:\n");
     for (int i = 0; i < car->getNItems(); i++)
     {
+      str.concat(i+1);
+      str.concat(" - ");
       str.concat(car->getItemName(i));
       str.concat("\n");
     }
     break;
-    break;
   }
   case EstRFID: // Fazer Pagamento
   {
-    str = String("Aproxime seu\n cartao RFID");
+    str = String("Aproxime seu\n cartao RFID:\n Valor:");
+    str.concat(car->getValor());
     break;
   }
   case EstPGMT: // Pagamento feito
