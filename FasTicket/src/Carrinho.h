@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#define MAX 10
+#define MAX 7
 
 using namespace std;
 
