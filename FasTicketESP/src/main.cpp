@@ -7,8 +7,8 @@
 #include "Carrinho.h"
 #include "Menu.h"
 #include "teclado.h"
-#include "RFID.h"
-#include "Wifi.h"
+//#include "RFID.h"
+//#include "Wifi.h"
 
 //----------- RFID---------------//
 #define SS_PIN 6
@@ -17,15 +17,15 @@ MFRC522 rfid(SS_PIN, RST_PIN);
 //-------------------------------//
 
 //-------------------------DISPLAY--------------------------------//
-#define TFT_RST 8
-#define TFT_DC 9
-#define TFT_CS 10
+#define TFT_CS    D2     // TFT CS  pin is connected to NodeMCU pin D2
+#define TFT_RST   D3     // TFT RST pin is connected to NodeMCU pin D3
+#define TFT_DC    D4     // TFT DC  pin is connected to NodeMCU pin D4
 Adafruit_ILI9341 tft(TFT_CS, TFT_DC, TFT_RST);
 //----------------------------------------------------------------//
 
 //-------------------------TECLADO--------------------------------//
-#define SCL_PIN 2
-#define SDO_PIN 3
+#define SCL_PIN D1
+#define SDO_PIN D0
 TTP229 ttp(SCL_PIN, SDO_PIN);
 //----------------------------------------------------------------//
 
@@ -36,7 +36,7 @@ void setup() {
 	Serial.begin(115200);
   SPI.begin(); 
   tft.begin();
-  rfid.PCD_Init();  
+  //rfid.PCD_Init();  
   menu.begin(&tft, &car);
   menu.imprimir();
 }
@@ -95,12 +95,14 @@ void loop() {
       menu.atualizar(EstINIC);
     }
     
-    String str = lerRFID(&rfid);
+    //String str = lerRFID(&rfid);
+    String str = String();
     if(str != String())
     {
       
       // Buscar no servidor se tem saldo
-      bool debitado = verificaSaldo(str, car.getValor());
+      //bool debitado = verificaSaldo(str, car.getValor());
+      bool debitado = 0;
       if(debitado)
       {
         menu.atualizar(EstPGMT);
