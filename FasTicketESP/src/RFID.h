@@ -4,14 +4,12 @@
 #include <MFRC522.h>
 #include <Arduino.h>
 
-String lerRFID(MFRC522 *rfid)
-{/*
-  String str = String();
-  //if (!rfid->PICC_IsNewCardPresent()) return;
-  //if (!rfid->PICC_ReadCardSerial()) return;
-  for(byte i = 0; i < rfid->uid.size; i++) 
+void lerRFID(MFRC522 *rfid, String *str)
+{
+  if (!rfid->PICC_IsNewCardPresent()) return;
+  if (!rfid->PICC_ReadCardSerial()) return;
+  for(int i = 0; i < rfid->uid.size; i++) 
   {
-    str.concat(String(rfid->uid.uidByte[i], HEX));
-  } */
-  return String();
+    str->concat(String(rfid->uid.uidByte[i], HEX));
+  } 
 }

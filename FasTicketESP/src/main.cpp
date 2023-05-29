@@ -7,12 +7,12 @@
 #include "Carrinho.h"
 #include "Menu.h"
 #include "teclado.h"
-//#include "RFID.h"
-//#include "Wifi.h"
+#include "RFID.h"
+#include "Wifi.h"
 
 //----------- RFID---------------//
-#define SS_PIN 6
-#define RST_PIN 7
+#define SS_PIN D8
+#define RST_PIN 10
 MFRC522 rfid(SS_PIN, RST_PIN); 
 //-------------------------------//
 
@@ -33,18 +33,21 @@ Carrinho car;
 Menu menu;
 
 void setup() {
-	Serial.begin(115200);
+  conectaWifi();
+	Serial.begin(9600);
   SPI.begin(); 
   tft.begin();
-  //rfid.PCD_Init();  
+  rfid.PCD_Init();  
   menu.begin(&tft, &car);
   menu.imprimir();
 }
 
-void loop() {
+void loop() { 
   if(menu.getEstado() == EstINIC)
   {
-    int key = ler(ttp.ReadKey16());
+    int key = 0;
+    key = ler(ttp.ReadKey16());
+    Serial.println(key);
     if(key < CONF && key > 0)
     {
       car.setItem(key);
@@ -53,7 +56,8 @@ void loop() {
   }
   else if(menu.getEstado() == EstCARR)
   {
-    int key = ler(ttp.ReadKey16());
+    int key = 0;
+    key = ler(ttp.ReadKey16());
     if(key < CONF && key > 0)
     {
       car.setItem(key);
@@ -75,7 +79,8 @@ void loop() {
   }
   else if (menu.getEstado() == EstCANC)
   {
-    int key = ler(ttp.ReadKey16());
+    int key = 0;
+    key = ler(ttp.ReadKey16());
     if(key < CONF && key > 0)
     {
       car.deleteItem(key-1);
@@ -95,15 +100,20 @@ void loop() {
       menu.atualizar(EstINIC);
     }
     
-    //String str = lerRFID(&rfid);
     String str = String();
+    lerRFID(&rfid, &str);
+    Serial.println(str);
     if(str != String())
-    {
-      
+    { 
+      menu.atualizar(EstINIC);
       // Buscar no servidor se tem saldo
-      //bool debitado = verificaSaldo(str, car.getValor());
-      bool debitado = 0;
-      if(debitado)
+      int debitado = verificaSaldo(str, car.getValor());
+      if(debitado < 0)
+      {
+        delay(500);
+        return;
+      }
+      else if(debitado == 1)
       {
         menu.atualizar(EstPGMT);
       }

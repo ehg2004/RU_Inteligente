@@ -3,7 +3,7 @@
 
 const char* ssid = "#";
 const char* password = "12345678";
-String serverName = "http://192.168.72.76:8888/"; // servidor a ser requisitado
+String serverName = "http://192.168.91.76:8888/"; // servidor a ser requisitado
 
 void setup() {
   Serial.begin(115200);
@@ -15,7 +15,7 @@ void setup() {
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    //Serial.print(".");
+    Serial.print(".");
   }
 
   //Serial.println("Conectado à rede Wi-Fi");
