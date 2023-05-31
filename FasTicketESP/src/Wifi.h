@@ -14,13 +14,13 @@ void conectaWifi()
 int verificaSaldo(String rfid, int valor)
 {
   
-  String serverName = "http://192.168.72.76:8888/";
+  String serverName = F("http://192.168.72.76:8888/");
 
   if (WiFi.status() == WL_CONNECTED) {
     WiFiClient client;
     HTTPClient http;      
 
-    String url = String("/arduino.php/?code=")+String(rfid)+String("&value=")+String(valor);
+    String url = String(F("/arduino.php/?code="))+String(rfid)+String(F("&value="))+String(valor);
     Serial.print(url);
 
     http.begin(client, serverName+url);

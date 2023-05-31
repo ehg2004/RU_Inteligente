@@ -1,6 +1,10 @@
 #include "Carrinho.h"
 
-Carrinho::Carrinho()
+Carrinho::Carrinho(
+    ros::NodeHandle  &_nh,
+    std_msgs::Int16MultiArray &_int_msg,
+    ros::Publisher &_pub_int
+):nh(_nh),int_msg(_int_msg),pub_int(_pub_int)
 {
   nItems = 0;
 }
@@ -41,17 +45,17 @@ Carrinho::Item::Item(int n)
   switch (n)
   {
   case 1:
-    name = String("Almoco");
+    name = String(F("Almoco"));
     price = 3;
     break;
   
   case 2:
-    name = String("Jantar");
+    name = String(F("Jantar"));
     price = 3;
     break;
   
   case 3:
-    name = String("Pao de Queijo");
+    name = String(F("Pao de Queijo"));
     price = 2;
     break;
   
@@ -105,6 +109,11 @@ int Carrinho::Item::getValor()
   return price;
 }
 
+int Carrinho::Item::getCode()
+{
+  return code;
+}
+
 bool Carrinho::deleteItem(int n)
 {
   if(n > nItems-1)
@@ -127,4 +136,17 @@ int Carrinho::getValor()
     valor += items[i].getValor();
   }
   return valor;
+}
+
+bool Carrinho::pub_items()
+{
+  int16_t data[nItems];
+  for (int i = 0; i < nItems; i++)
+  {
+    data[i]=items[i].getCode();
+  }
+  int_msg.data=data;
+  pub_int.publish(&int_msg);
+  int_msg.data = NULL;
+  return true;
 }

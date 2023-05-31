@@ -9,7 +9,16 @@
 #include "teclado.h"
 #include "RFID.h"
 #include "Wifi.h"
+#include <ros.h>
+#include <std_msgs/Int16MultiArray.h>
+#include <std_msgs/String.h>
 
+
+ros::NodeHandle  nh;
+std_msgs::Int16MultiArray int_msg;
+ros::Publisher pub_int("RU_int_topic",&int_msg);
+std_msgs::String dbg_msg;
+ros::Publisher pub_dbg("RU_dbg_topic",&dbg_msg);
 //----------- RFID---------------//
 #define SS_PIN D8
 #define RST_PIN 10
@@ -29,7 +38,7 @@ Adafruit_ILI9341 tft(TFT_CS, TFT_DC, TFT_RST);
 TTP229 ttp(SCL_PIN, SDO_PIN);
 //----------------------------------------------------------------//
 
-Carrinho car;
+Carrinho car(nh,int_msg,pub_int);
 Menu menu;
 
 void setup() {
@@ -133,6 +142,7 @@ void loop() {
   {
     // imprimir 
     menu.atualizar(EstINIC);
+    car.pub_items();
     car.reset();
     delay(5000);
   }
