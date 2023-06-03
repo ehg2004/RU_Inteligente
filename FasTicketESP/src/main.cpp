@@ -10,13 +10,9 @@
 #include "RFID.h"
 #include "Wifi.h"
 #include <ros.h>
-#include <std_msgs/Int16MultiArray.h>
 #include <std_msgs/String.h>
 
-
 ros::NodeHandle  nh;
-std_msgs::Int16MultiArray int_msg;
-ros::Publisher pub_int("RU_int_topic",&int_msg);
 std_msgs::String dbg_msg;
 ros::Publisher pub_dbg("RU_dbg_topic",&dbg_msg);
 //----------- RFID---------------//
@@ -38,25 +34,41 @@ Adafruit_ILI9341 tft(TFT_CS, TFT_DC, TFT_RST);
 TTP229 ttp(SCL_PIN, SDO_PIN);
 //----------------------------------------------------------------//
 
-Carrinho car(nh,int_msg,pub_int);
-Menu menu;
+Carrinho car; // cart obj declaration
+
+Menu menu; // menu obj declaration
 
 void setup() {
-  conectaWifi();
-	Serial.begin(9600);
-  SPI.begin(); 
-  tft.begin();
-  rfid.PCD_Init();  
-  menu.begin(&tft, &car);
-  menu.imprimir();
+
+  Serial.begin(57600); // starts Serial UART COMM // is used by rosserial node
+  delay(1000);
+
+ 
+  nh.initNode(); nh.advertise(pub_dbg); // starts ROS Nodes
+  delay(1000);
+
+
+
+  conectaWifi();// start WIFI
+
+  SPI.begin(); //start SPI COMM
+
+  tft.begin();// start display obj
+
+  rfid.PCD_Init();  // start rfid_r obj
+
+  menu.begin(&tft, &car); // start menu obj
+
+  menu.imprimir(); // prints first menu page
+
+  delay(1000);
 }
 
-void loop() { 
+void loop() {
   if(menu.getEstado() == EstINIC)
   {
     int key = 0;
     key = ler(ttp.ReadKey16());
-    Serial.println(key);
     if(key < CONF && key > 0)
     {
       car.setItem(key);
@@ -111,18 +123,28 @@ void loop() {
     
     String str = String();
     lerRFID(&rfid, &str);
-    Serial.println(str);
+    //Serial.println(str);
     if(str != String())
     { 
-      menu.atualizar(EstINIC);
+      //menu.atualizar(EstINIC);
       // Buscar no servidor se tem saldo
-      int debitado = verificaSaldo(str, car.getValor());
-      if(debitado < 0)
+      int debitado = -1 ; //verificaSaldo(str, car.getValor());
+
+      while( debitado < 0)
       {
-        delay(500);
-        return;
+        debitado = verificaSaldo(str, car.getValor()); 
+        delayMicroseconds(100);
+        yield();
+        nh.spinOnce();
       }
-      else if(debitado == 1)
+      // Serial.println(debitado);  
+      // if(debitado < 0)
+      // {
+      //   delay(500);
+      //   return;
+      // }
+      // else if(debitado == 1)
+      if(debitado == 1)
       {
         menu.atualizar(EstPGMT);
       }
@@ -141,10 +163,26 @@ void loop() {
   else if(menu.getEstado() == EstPGMT)
   {
     // imprimir 
-    menu.atualizar(EstINIC);
-    car.pub_items();
+    menu.atualizar(EstINIC); //int_msg.data=
+    int16_t* items = car.pub_items();
+    int n = car.getNItems();
+    char buf[n+1];
+    buf[n]='\0';
+    for(int i = 0; i < n ; i++)
+    {
+      buf[i] = (char)(items[i]+'0');//convert int to numerical char//itoa(items[i],&buf[i],10);//for bigger numbers, could be used  
+    }
+
+    dbg_msg.data=buf;
+    pub_dbg.publish(&dbg_msg);
+    dbg_msg.data = NULL;
+    free(items); 
+    items = NULL;
     car.reset();
     delay(5000);
   }
+  nh.spinOnce();
+  //delay(1000);
   menu.imprimir();
+
 }

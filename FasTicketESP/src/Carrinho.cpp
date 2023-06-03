@@ -1,10 +1,10 @@
 #include "Carrinho.h"
 
 Carrinho::Carrinho(
-    ros::NodeHandle  &_nh,
-    std_msgs::Int16MultiArray &_int_msg,
-    ros::Publisher &_pub_int
-):nh(_nh),int_msg(_int_msg),pub_int(_pub_int)
+    // ros::NodeHandle * _nh,
+    // std_msgs::Int16MultiArray *_int_msg,
+    // ros::Publisher *_pub_int
+)//:nh(_nh),int_msg(_int_msg),pub_int(_pub_int)
 {
   nItems = 0;
 }
@@ -138,15 +138,15 @@ int Carrinho::getValor()
   return valor;
 }
 
-bool Carrinho::pub_items()
+int16_t* Carrinho::pub_items()
 {
-  int16_t data[nItems];
+  int16_t * data =(int16_t *)malloc(nItems*sizeof(int16_t));
   for (int i = 0; i < nItems; i++)
   {
     data[i]=items[i].getCode();
   }
-  int_msg.data=data;
-  pub_int.publish(&int_msg);
-  int_msg.data = NULL;
-  return true;
+  // int_msg->data=data;
+  // pub_int->publish(int_msg);
+  // int_msg->data = NULL;
+  return data;
 }

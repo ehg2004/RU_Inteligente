@@ -4,17 +4,17 @@
 
 #define MAX 7
 
-#include <ros.h>
-#include <std_msgs/Int16MultiArray.h>
+// #include <ros.h>
+// #include <std_msgs/Int16MultiArray.h>
 
 using namespace std;
 
 class Carrinho
 {
 private:
-  ros::NodeHandle  nh;
-  std_msgs::Int16MultiArray int_msg;
-  ros::Publisher pub_int;
+  // ros::NodeHandle  *nh;
+  // std_msgs::Int16MultiArray *int_msg;
+  // ros::Publisher *pub_int;
   class Item
   {
   private:
@@ -33,9 +33,10 @@ private:
 public:
   //Carrinho();
   Carrinho(    
-    ros::NodeHandle  &_nh ,
-    std_msgs::Int16MultiArray &_int_msg ,
-    ros::Publisher &_pub_int );
+    // ros::NodeHandle  *_nh ,
+    // std_msgs::Int16MultiArray *_int_msg ,
+    // ros::Publisher *_pub_int
+     );
   ~Carrinho();
   String getItemName(int i);
   int getNItems();
@@ -43,5 +44,5 @@ public:
   void reset();
   bool deleteItem(int n);
   int getValor();
-  bool pub_items();
+  int16_t* pub_items();
 };

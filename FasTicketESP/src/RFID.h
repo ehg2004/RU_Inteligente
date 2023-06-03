@@ -11,5 +11,6 @@ void lerRFID(MFRC522 *rfid, String *str)
   for(int i = 0; i < rfid->uid.size; i++) 
   {
     str->concat(String(rfid->uid.uidByte[i], HEX));
+    //yield();
   } 
 }
