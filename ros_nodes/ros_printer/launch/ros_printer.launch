@@ -1,0 +1,16 @@
+<launch>
+
+  <group ns="mega_adk">
+    <node pkg="rosserial_python" name="mega_adk_node" type="serial_node.py" args="_port:=/dev/ttyACM0  _baud:=57600" output="screen"/>
+  </group>
+
+  <group ns="esp8266">
+    <!-- <node pkg="rosserial_python" name="esp8266_node" type="serial_node.py" args="_port:=/dev/ttyUSB0  _baud:=57600" output="screen"/> -->
+    <node pkg="rosserial_server" type="socket_node" name="rosserial_server" />
+  </group>
+  <group ns="printer">
+    <node pkg="ros_printer" name="printer_node" type="arduino_interface_node" args="/dev/ttyACM1"/>
+  </group>
+  
+</launch>
+
