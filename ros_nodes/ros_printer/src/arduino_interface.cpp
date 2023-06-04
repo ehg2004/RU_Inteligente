@@ -107,7 +107,7 @@ void Printer_Node_Subscriber::list_Callback (const std_msgs::String::ConstPtr& m
     {
     ROS_INFO("[ROS_PRINTER] I heard: [%s]", msg->data.c_str());
     buf<<ImpressaoTexto(msg->data.c_str(),0,0,1)
-    <<AvancaPapel(1)
+    <<AvancaPapel(2)
     <<Corte(2);
     ROS_INFO("[ROS_PRINTER] callback stats: [%s]", (buf.str()).c_str());
     bufftest();

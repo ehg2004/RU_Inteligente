@@ -4,7 +4,10 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
- #include "Credentials.h"
+#include "Credentials.h"
+
+  // #define WIFI_BYPASS
+
 /*
 
 create another file to save your wifi credentials

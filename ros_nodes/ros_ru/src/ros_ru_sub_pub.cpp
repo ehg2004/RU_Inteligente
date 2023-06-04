@@ -64,6 +64,7 @@ void ros_ru_interface::ru_sub_callback(const std_msgs::String::ConstPtr& msg)
         str_msg->data.clear();
         free(name);
         name =NULL;
+        sleep(3); //  needs to sleep to feed the printer again
     }
 
 }
